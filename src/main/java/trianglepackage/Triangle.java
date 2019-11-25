@@ -4,19 +4,19 @@ public class Triangle {
 
     private int side1, side2, side3;
     private static final String P_EQUILATERAL = "equilateral";
-    private static final String P_ISOSCELES   = "isossceles";
+    private static final String P_ISOSCELES = "isossceles";
     private static final String P_RIGHTANGLED = "right-angled";
-    private static final String P_SCALENE     = "scalene";
-    private static final String P_IMPOSSIBLE  = "impossible";
+    private static final String P_SCALENE = "scalene";
+    private static final String P_IMPOSSIBLE = "impossible";
 
     /**
      * Constuctor (without error checking)
+     *
      * @param s1 length of the side1 as an integer.
      * @param s2 length of the side2 as an integer.
      * @param s3 length of the side3 as an integer.
      */
-    public Triangle(int s1, int s2, int s3)
-    {
+    public Triangle(int s1, int s2, int s3) {
         side1 = s1;
         side2 = s2;
         side3 = s3;
@@ -24,13 +24,13 @@ public class Triangle {
 
     /**
      * Sets the lenghts of the sides of this triangle.
+     *
      * @param s1 length of the side1
      * @param s2 length of the side2
      * @param s3 length of the side3
      * @return a reference to this triangle.
      */
-    public Triangle setSideLengths(int s1, int s2, int s3)
-    {
+    public Triangle setSideLengths(int s1, int s2, int s3) {
         side1 = s1;
         side2 = s2;
         side3 = s3;
@@ -39,30 +39,29 @@ public class Triangle {
 
     /**
      * Gets the side lenghts.
+     *
      * @return a comma separated list of side lengths
      */
-    public String getSideLengths()
-    {
+    public String getSideLengths() {
         return side1 + "," + side2 + "," + side3;
     }
 
     /**
      * Gets the perimeter of the triangle.
+     *
      * @return -1 if input values are invalid, otherwise the perimeter.
      */
-    public int getPerimeter()
-    {
+    public int getPerimeter() {
         return side1 + side2 + side3;
     }
 
     /**
      * Gets the area of the triangle.
+     *
      * @return area of the triangle, -1.0 if triangle is impossible.
      */
-    public double getArea()
-    {
-        if (!isImpossible())
-        {
+    public double getArea() {
+        if (!isImpossible()) {
             return Math.sqrt(getPerimeter()
                     / 2
                     * (getPerimeter() / 2 - side1)
@@ -81,29 +80,23 @@ public class Triangle {
      *  <li>scalene - all sides different lengths, no right angles
      *  <li>impossible - if the lengths can't form a triangle
      * </ul>
+     *
      * @return type of the triangle as a string.
      */
-    public String classify()
-    {
-        if (isImpossible())
-        {
+    public String classify() {
+        if (isImpossible()) {
             return P_IMPOSSIBLE;
         }
 
-        if (side1 == side2)
-        {
-            if (side2 == side3)
-            {
+        if (side1 == side2) {
+            if (side2 == side3) {
                 return P_EQUILATERAL;
-            }
-            else
-            {
+            } else {
                 return P_ISOSCELES;
             }
         }
 
-        if (isRightAngled())
-        {
+        if (isRightAngled()) {
             return P_RIGHTANGLED;
         }
 
@@ -113,12 +106,11 @@ public class Triangle {
     /**
      * Checks if the triangle is isosceles. Note: isosceles triangle may also
      * be equilateral and right-angled.
+     *
      * @return true if two sides have equal length
      */
-    private boolean isIsosceles()
-    {
-        if (side1 == side2 || side2 == side3 || side1 == side3)
-        {
+    private boolean isIsosceles() {
+        if (side1 == side2 || side2 == side3 || side1 == side3) {
             return true;
         }
         return false;
@@ -126,12 +118,11 @@ public class Triangle {
 
     /**
      * Checks if the triangle is equilateral.
+     *
      * @return true if all three sides have equal length.
      */
-    private boolean isEquilateral()
-    {
-        if (side1 == side3)
-        {
+    private boolean isEquilateral() {
+        if (side1 == side3) {
             return true;
 
         }
@@ -141,11 +132,11 @@ public class Triangle {
     /**
      * Checks if the triangle is right-angled. Note: right-angled triangle may
      * also be isosceles.
+     *
      * @return true if one angle is a right angle, otherwise false.
      */
-    private boolean isRightAngled()
-    {
-        int[] sides = new int[] { side1, side2, side3 };
+    private boolean isRightAngled() {
+        int[] sides = new int[]{side1, side2, side3};
 
         return sides[2]
                 == Math.sqrt((long) sides[0] * sides[0] + (long) sides[1] * sides[1]);
@@ -153,12 +144,11 @@ public class Triangle {
 
     /**
      * Checks if the triangle is scalene.
+     *
      * @return true if all sides different lengths, no right angles.
      */
-    private boolean isScalene()
-    {
-        if (side1 != side2 && side1 != side3 && side2 != side3)
-        {
+    private boolean isScalene() {
+        if (side1 != side2 && side1 != side3 && side2 != side3) {
             return true;
         }
 
@@ -168,12 +158,11 @@ public class Triangle {
     /**
      * Checks whether the given side lengths form a
      * valid triangle.
+     *
      * @return true if the given side lenghts do not form a triangle.
      */
-    private boolean isImpossible()
-    {
-        if (side1 <= 0 || side2 <= 0 || side3 <= 0)
-        {
+    private boolean isImpossible() {
+        if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
             return true;
         }
         return false;
@@ -184,18 +173,14 @@ public class Triangle {
      * <p>Main method is only used for testing purposes, no unit tests need to
      * be written for this method.</p>
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Triangle triangle = null;
-        try
-        {
+        try {
             triangle = new Triangle(
                     Integer.parseInt(args[0]),
                     Integer.parseInt(args[1]),
                     Integer.parseInt(args[2]));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(
                     "Usage: java Quadrangle <side1:int> <side2:int> <side3:int>");
             return;
